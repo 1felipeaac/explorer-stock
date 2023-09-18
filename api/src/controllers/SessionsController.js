@@ -29,7 +29,7 @@ class SessionsController {
 
     response.cookie("token", token, 
       {
-        httpOnly: ture,
+        httpOnly: true,
         sameSite: 'Strict',
         secure: true,
         maxAge: 15 * 60 * 1000
