@@ -27,7 +27,17 @@ class SessionsController {
       expiresIn
     });
 
-    response.status(201).json({ token, user });
+    response.cookie("token", token, 
+      {
+        httpOnly: ture,
+        sameSite: 'Strict',
+        secure: true,
+        maxAge: 15 * 60 * 1000
+      }); // faz com que o token sejá lindo somente através de requisições http entre cliente e servidor
+
+    delete user.password; // retirar o password antes de enviar o user
+
+    response.status(201).json({ user });
   }
 }
 

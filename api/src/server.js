@@ -3,12 +3,16 @@ require("express-async-errors");
 const cors = require("cors");
 const express = require("express");
 const routes = require("./routes");
-
+const cookieParser = require("cookie-parser");
 const AppError = require("./utils/AppError");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser())
+app.use(cors({
+  origin: ["http://localhost:5173/", "http://127.0.0.1:5173/"], // endereços que podem fazer requisições
+  credentials: true // envia ao frontend o coockie com o token
+}));
 
 app.use(routes);
 
