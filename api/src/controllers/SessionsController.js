@@ -8,7 +8,7 @@ class SessionsController {
   async create(request, response) {
     const { email, password } = request.body;
 
-    const user = await knex("users").where({ email }).first();
+    const user = await knex("users").where({ email }).first(); // busca no banco
 
     if (!user) {
       throw new AppError("E-mail e/ou senha incorreta.", 401);
@@ -22,7 +22,7 @@ class SessionsController {
 
     const { secret, expiresIn } = authConfig.jwt;
 
-    const token = sign({}, secret, {
+    const token = sign({role: user.role}, secret, { // repassar para dentro do token o perfil do usuario (role: user.role)
       subject: String(user.id),
       expiresIn
     });
