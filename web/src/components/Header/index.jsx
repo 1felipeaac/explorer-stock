@@ -15,7 +15,8 @@ export function Header() {
                 <User>
                     <span>Olá, <strong>{user.name}</strong></span>
                     <small>
-                        <FiUser /> Perfil do usuário
+                    {/*CharAt(0) = recupera o caractere da posição indicada, slice(1) = 'corta' a string a partir da posição indicada */}
+                        <FiUser /> Perfil de {(user.role).charAt(0).toUpperCase()+(user.role).slice(1)} 
                     </small>
                 </User>
             </aside>
